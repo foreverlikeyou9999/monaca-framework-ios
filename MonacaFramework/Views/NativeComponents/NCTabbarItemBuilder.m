@@ -21,7 +21,7 @@ updateTabberItem(UITabBarItem *item, NSDictionary *style) {
     NSString *imageName = [style objectForKey:kNCStyleImage];
     UIImage *image = nil;
     if (imageName) {
-        NSURL *appWWWURL = [((MonacaDelegate *)[[UIApplication sharedApplication] delegate]) getBaseURL];
+        NSURL *appWWWURL = [((MFDelegate *)[[UIApplication sharedApplication] delegate]) getBaseURL];
         NSString *imagePath = [[appWWWURL path] stringByAppendingPathComponent:imageName];
         image = [UIImage imageWithContentsOfFile:imagePath];
         if (image) {
@@ -43,7 +43,7 @@ updateTabberItem(UITabBarItem *item, NSDictionary *style) {
 }
 
 + (UITabBarItem *)tabbarItem:(NSDictionary *)style {
-    UITabBarItem *item = [[[UITabBarItem alloc] initWithTitle:nil image:nil tag:0] autorelease];
+    UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:nil image:nil tag:0];
     return updateTabberItem(item, style);
 }
 

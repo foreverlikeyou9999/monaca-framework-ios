@@ -7,7 +7,7 @@
 //
 
 #import "NCButtonBuilder.h"
-#import "Utility.h"
+#import "MFUtility.h"
 #import "NCButton.h"
 
 @implementation NCButtonBuilder
@@ -24,15 +24,10 @@ setTextColor(UIBarButtonItem *button, UIColor *color) {
 }
 
 static UIBarButtonItem *
-updateVisibility(UIBarButtonItem *button, NSDictionary *style, UIView *invisibleView) {
-    if ([((NCButton *)button).position isEqualToString:kNCPositionTop]){
-        BOOL invisible = isFalse([style objectForKey:kNCStyleVisibility]);
-        button.customView = invisible ? [[[UIView alloc] init] autorelease] : invisibleView;
-    }else{
-        NSString *cid = [style objectForKey:kNCTypeID];
-        UIView *view = [[Utility currentTabBarController].viewDict objectForKey:cid];
-        [view setHidden:isFalse([style objectForKey:kNCStyleVisibility])];
-    }
+updateVisibility(UIBarButtonItem *button, NSDictionary *style) {
+    NSString *cid = [style objectForKey:kNCTypeID];
+    UIView *view = [[MFUtility currentTabBarController].viewDict objectForKey:cid];
+    [view setHidden:isFalse([style objectForKey:kNCStyleVisibility])];
     return button;
 }
 
@@ -43,12 +38,11 @@ updateVisibility(UIBarButtonItem *button, NSDictionary *style, UIView *invisible
 
 static UIBarButtonItem *
 updateButton(UIBarButtonItem *button, NSDictionary *style) {
-    UIView *invisibleView = nil;
     NSString *text = [style objectForKey:kNCStyleText];
     NSString *innerImagePath = [style objectForKey:kNCStyleInnerImage];
 
     if (innerImagePath) {
-        NSURL *appWWWURL = [((MonacaDelegate *)[[UIApplication sharedApplication] delegate]) getBaseURL];
+        NSURL *appWWWURL = [((MFDelegate *)[[UIApplication sharedApplication] delegate]) getBaseURL];
         NSString *imagePath = [[appWWWURL path] stringByAppendingPathComponent:innerImagePath];
         UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
         if (image) {
@@ -84,7 +78,7 @@ updateButton(UIBarButtonItem *button, NSDictionary *style) {
     
     NSString *imageName = [style objectForKey:kNCStyleImage];
     if (imageName) {
-        NSURL *appWWWURL = [((MonacaDelegate *)[[UIApplication sharedApplication] delegate]) getBaseURL];
+        NSURL *appWWWURL = [((MFDelegate *)[[UIApplication sharedApplication] delegate]) getBaseURL];
         NSString *imagePath = [[appWWWURL path] stringByAppendingPathComponent:imageName];
         UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
         
@@ -94,11 +88,10 @@ updateButton(UIBarButtonItem *button, NSDictionary *style) {
         imageButtonView.enabled = !disable;
         [imageButtonView setBackgroundImage:image forState:UIControlStateNormal];
         button.customView = imageButtonView;
-        invisibleView = button.customView;
-    } 
+    }
 
     // Visibility
-    updateVisibility(button, style, invisibleView);
+    updateVisibility(button, style);
 
     return button;
 }
@@ -121,15 +114,15 @@ updateButton(UIBarButtonItem *button, NSDictionary *style) {
         } else if ([iosStyle isEqualToString:@"UIBarButtonSystemItemRedo"]) {
             item = UIBarButtonSystemItemRedo;
         }
-        return [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:item target:nil action:nil] autorelease];
+        return [[UIBarButtonItem alloc] initWithBarButtonSystemItem:item target:nil action:nil];
     }
 #endif // MONACA_PRIVATE_API
     
-    NCButton *button = [[[NCButton alloc] initWithTitle:nil
+    NCButton *button = [[NCButton alloc] initWithTitle:nil
                                                   style:UIBarButtonItemStyleBordered
                                                  target:nil
                                                  action:nil
-                                                postion:aPosition] autorelease];
+                                                postion:aPosition];
     return updateButton(button, dict);
 }
 
@@ -146,7 +139,7 @@ isButtonView(UIView *view) {
 
 static void
 updateViewDictionary(NSDictionary *style) {
-    MonacaDelegate *delegate = (MonacaDelegate *)[UIApplication sharedApplication].delegate;
+    MFDelegate *delegate = (MFDelegate *)[UIApplication sharedApplication].delegate;
     NSString *cid = [style objectForKey:kNCTypeID];
 
     // NOTE(nhiroki):　UIToolbar に UIBarButtonItem のオブジェクトを追加すると、実際には
@@ -164,7 +157,7 @@ updateViewDictionary(NSDictionary *style) {
         for (UIView *toolbar in navController.navigationBar.subviews) {
             for (UIView *view in toolbar.subviews) {
                 if (isButtonView(view) && view.tag != kUpdatedTag) {
-                    [[Utility currentTabBarController].viewDict setObject:view forKey:cid];
+                    [[MFUtility currentTabBarController].viewDict setObject:view forKey:cid];
                     view.tag = kUpdatedTag;
                 }
             }
@@ -172,7 +165,7 @@ updateViewDictionary(NSDictionary *style) {
         for (UIView *toolbar in navController.toolbar.subviews) {
             for (UIView *view in toolbar.subviews) {
                 if (isButtonView(view) && view.tag != kUpdatedTag) {
-                    [[Utility currentTabBarController].viewDict setObject:view forKey:cid];
+                    [[MFUtility currentTabBarController].viewDict setObject:view forKey:cid];
                     view.tag = kUpdatedTag;
                 }
             }
@@ -187,7 +180,7 @@ updateBackgroundColor(UIBarButtonItem *button, NSDictionary *style) {
         NSString *bgColor = [style objectForKey:kNCStyleBackgroundColor];
         if (bgColor) {
             UIColor *color = hexToUIColor(removeSharpPrefix(bgColor), 1.0f);
-            UIView *view = [[Utility currentTabBarController].viewDict objectForKey:cid];
+            UIView *view = [[MFUtility currentTabBarController].viewDict objectForKey:cid];
             [view performSelector:@selector(setTintColor:) withObject:color];
         }
     }
