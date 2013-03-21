@@ -24,6 +24,7 @@
     NSString *previousPath_;
     BOOL recall_;
     BOOL interfaceOrientationUnspecified;
+    BOOL withinSinglePage;
     NSMutableDictionary *uiSetting;
     NSMutableArray *monacaTabViewControllers;
  @protected
@@ -42,6 +43,7 @@
 - (BOOL)isInterfaceOrientationUnspecified;
 
 - (NSString *)hookForLoadedHTML:(NSString *)html request:(NSURLRequest *)aRequest;
+- (void)sendPush;
 - (void)initPlugins;
 - (void)resetPlugins;
 - (void)releaseWebView;

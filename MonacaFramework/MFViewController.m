@@ -330,7 +330,7 @@
         }
 
         @try {
-            if (cdvViewController.webView.tag != kWebViewIgnoreStyle) {
+            if (cdvViewController.webView.tag != kWebViewIgnoreStyle && withinSinglePage == NO) {
                 cdvViewController.webView.tag = kWebViewNormal;
                 // Apply user interface definitions.
                 NSDictionary *uiDict = [self parseJSONFile:uipath];
@@ -362,14 +362,27 @@
     return html;
 }
 
+- (void)sendPush
+{
+    NSString *js = [NSString stringWithFormat:@"monaca.cloud.Push.send(%@);", [[NSUserDefaults standardUserDefaults] objectForKey:@"extraJSON"]];
+    [self.cdvViewController.webView stringByEvaluatingJavaScriptFromString:js];
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"extraJSON"];
+}
+
 - (void) webViewDidFinishLoad:(UIWebView*) theWebView 
 {
     // Black base color for background matches the native apps
     //theWebView.backgroundColor = [UIColor blackColor];
     
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"extraJSON"] != nil) {
+        [self sendPush];
+    }
+
     [MFEvent dispatchEvent:monacaEventDidLoadUIFile withInfo:nil];
     [MFTransitPlugin webViewDidFinishLoad:theWebView viewController:self];
     
+    withinSinglePage = NO;
+
     return [cdvViewController webViewDidFinishLoad:theWebView];
 }
 
@@ -396,6 +409,7 @@
 
 - (void)webViewDidStartLoad:(UIWebView *)_webView {
     [self.cdvViewController webViewDidStartLoad:_webView];
+    withinSinglePage = YES;
 }
 
 - (void)webView:(UIWebView *)_webView didFailLoadWithError:(NSError *)error {
@@ -477,6 +491,7 @@
 }
 
 - (void)destroy {
+    [self.cdvViewController.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"about:blank"]]];
     [self resetPlugins];
     [self releaseWebView];
 }

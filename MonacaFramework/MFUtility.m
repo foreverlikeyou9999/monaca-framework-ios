@@ -10,6 +10,55 @@
 
 @implementation MFUtility
 
+static NSString *base_url = @"https://api.monaca.mobi";
+
++ (NSURLResponse *)fetchFrom:(NSString *)url method:(NSString *)method parameter:(NSString *)parameter {
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+    [request setHTTPMethod:method];
+    [request setCachePolicy:NSURLRequestReloadIgnoringCacheData];
+
+    NSData *requestBody = [parameter dataUsingEncoding:NSUTF8StringEncoding];
+    [request setHTTPBody:requestBody];
+    [request setHTTPShouldHandleCookies:YES];
+    [request setValue:[[self class] getUserAgent]  forHTTPHeaderField:@"User-Agent"];
+
+    // Fetch from the given URL.
+    NSURLResponse *response = nil;
+    NSError *error = nil;
+    [NSURLConnection sendSynchronousRequest:request
+                                         returningResponse:&response error:&error];
+    if (error != nil) {
+        return nil;
+        //        @throw error;
+    }
+
+    return response;
+}
+
++ (NSString *)getUserAgent
+{
+    return [NSString stringWithFormat:@"%@/%@" ,[[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleDisplayName"],
+            [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleVersion"]];
+}
+
+
++ (NSDictionary *)parseJSON:(NSString *)json {
+    return [json cdvjk_objectFromJSONString];
+}
+
++ (NSDictionary *)getAppJSON
+{
+    NSString *base_path = [[[[MFUtility getAppDelegate] getBaseURL] path] stringByReplacingOccurrencesOfString:@"www" withString:@""];
+    NSURL *json_url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@app.json", base_path]];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:json_url];
+    NSURLResponse *response = nil;
+    NSError *error = nil;
+    NSData *data = [NSURLConnection sendSynchronousRequest:request
+                                         returningResponse:&response error:&error];
+    NSString *json = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    return [[self class] parseJSON:json];
+}
+
 + (MFTabBarController *)currentTabBarController {
     return (MFTabBarController *)((MFDelegate *)[UIApplication sharedApplication].delegate).viewController.tabBarController;
 }
@@ -77,7 +126,7 @@
  * 404 page
  */
 + (void) show404PageWithWebView:(UIWebView *)webView path:(NSString *)aPath {
-    NSLog(@"Page not found (as warning):%@", aPath);
+    NSLog(@"Page not found (as warning):%@", [MFUtility getWWWShortPath:aPath]);
     NSString *pathFor404 = [[NSBundle mainBundle] pathForResource:@"404/index" ofType:@"html"];
     NSString *html = [NSString stringWithContentsOfFile:pathFor404 encoding:NSUTF8StringEncoding error:nil];
 
@@ -90,12 +139,10 @@
  *  convert path (ex 1234/xxxx/www/yyy.html -> www/yyy.html)
  */
 + (NSString *)getWWWShortPath:(NSString *)path{
-    if (path == nil || [path rangeOfString:@"www/"].location == NSNotFound) {
+    if (path == nil || [path rangeOfString:@"assets/"].location == NSNotFound) {
         return @"";
     } else {
-        NSMutableArray *array = [NSMutableArray arrayWithArray:[path componentsSeparatedByString:@"www/"]];
-        if(array.count > 0) [array removeObjectAtIndex:0];
-        return [@"www" stringByAppendingPathComponent:[array objectAtIndex:0]];
+        return [path substringFromIndex:[path rangeOfString:@"assets/"].location + [@"assets/" length]];
     }
 }
 
@@ -187,6 +234,79 @@
         }
     }
     return keyValues;
+}
+
++ (NSURLResponse *)register_push:(NSString *)deviceToken
+{
+    NSString *push_projectId = [[[[self class] getAppJSON] objectForKey:@"pushNotification"] objectForKey:@"pushProjectId"];
+
+    if ([[NSBundle mainBundle] objectForInfoDictionaryKey:@"MonacaDomain"] != nil) {
+        base_url = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"MonacaDomain"];
+    }
+
+    NSString *url = [NSString stringWithFormat:@"%@/v1/push/register/%@", base_url, [MFUtility urlEncode:push_projectId]];
+    NSString *os = @"ios";
+    NSString *deviceId = [[NSUserDefaults standardUserDefaults] objectForKey:@"UUID"];
+    NSString *env = @"prod";
+    NSString *buildType;
+
+    if ([[NSBundle mainBundle] objectForInfoDictionaryKey:@"MonacaEnv"] != nil) {
+        env = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"MonacaEnv"];
+    }
+
+#ifdef DEBUG
+    buildType = @"debug";
+#else
+    buildType = @"release";
+#endif
+
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleVersionKey];
+
+    NSString *parameter = [NSString stringWithFormat:@"platform=%@&deviceId=%@&env=%@&buildType=%@&version=%@&deviceToken=%@",
+                           [MFUtility urlEncode:os],
+                           [MFUtility urlEncode:deviceId],
+                           [MFUtility urlEncode:env],
+                           [MFUtility urlEncode:buildType],
+                           [MFUtility urlEncode:version],
+                           [MFUtility urlEncode:deviceToken]];
+
+    return [[self class] fetchFrom:url method:@"POST" parameter:parameter];
+}
+
++ (void)setMonacaCloudCookie
+{
+    NSDictionary *appJSON = [MFUtility getAppJSON];
+    NSURL *endPoint = [NSURL URLWithString:[[appJSON objectForKey:@"monacaCloud"] objectForKey:@"endPoint"]];
+    NSString *domain = [endPoint host];
+    NSString *path = [endPoint path];
+    NSString *name = @"MONACA_CLOUD_DEVICE_ID";
+    NSString *device_id = [[NSUserDefaults standardUserDefaults] objectForKey:@"UUID"];
+
+    NSDictionary *properties = [[NSMutableDictionary alloc] init];
+    [properties setValue:domain forKey:NSHTTPCookieDomain];
+    [properties setValue:path forKey:NSHTTPCookiePath];
+    [properties setValue:name forKey:NSHTTPCookieName];
+    [properties setValue:device_id forKey:NSHTTPCookieValue];
+    [properties setValue:@"TURE" forKey:NSHTTPCookieSecure];
+    [properties setValue:nil forKey:NSHTTPCookieExpires];
+    NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:properties];
+    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    [storage setCookie:cookie];
+}
+
++ (void)clearMonacaCloudCookie
+{
+    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (NSHTTPCookie *cookie in [storage cookies]) {
+        NSDictionary *properties = [cookie properties];
+        NSString *name = [properties objectForKey:NSHTTPCookieName];
+        if ([name isEqualToString:@"MONACA_CLOUD_DEVICE_ID"]) {
+            [properties setValue:[NSDate dateWithTimeIntervalSinceNow:-3600] forKey:NSHTTPCookieExpires];
+            NSHTTPCookie *newCookie = [NSHTTPCookie cookieWithProperties:properties];
+            [storage deleteCookie:cookie];
+            [storage setCookie:newCookie];
+        }
+    }
 }
 
 @end

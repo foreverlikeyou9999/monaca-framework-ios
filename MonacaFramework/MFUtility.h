@@ -28,5 +28,9 @@
 + (NSString *)urlDecode:(NSString *)text;
 + (MFDelegate *)getAppDelegate;
 + (NSMutableDictionary *)parseQuery:(NSURLRequest *)request;
++ (NSURLResponse *)register_push:(NSString *)deviceToken;
++ (NSDictionary *)getAppJSON;
++ (void)setMonacaCloudCookie;
++ (void)clearMonacaCloudCookie;
 
 @end
