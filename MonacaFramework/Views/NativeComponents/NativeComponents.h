@@ -16,6 +16,7 @@
 #import "NCTitleView.h"
 #import "NCTabbarItemBuilder.h"
 #import "NCBackButtonBuilder.h"
+#import "NCButton.h"
 
 #import "NCToolbar.h"
 #import "NCManager.h"
@@ -23,3 +24,4 @@
 // WebView status tags.
 static const NSUInteger kWebViewNormal = 0;
 static const NSUInteger kWebViewIgnoreStyle = 10;  // Ignore native component style.
+static const NSUInteger kWebViewBackground = 20;

@@ -7,6 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E01CC95174F4C06003E60D6 /* MFSpinnerParameter.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E01CC8F174F4C06003E60D6 /* MFSpinnerParameter.h */; };
+		0E01CC96174F4C06003E60D6 /* MFSpinnerParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E01CC90174F4C06003E60D6 /* MFSpinnerParameter.m */; };
+		0E01CC97174F4C06003E60D6 /* MFSpinnerParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E01CC90174F4C06003E60D6 /* MFSpinnerParameter.m */; };
+		0E01CC98174F4C06003E60D6 /* MFSpinnerParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E01CC90174F4C06003E60D6 /* MFSpinnerParameter.m */; };
+		0E01CC99174F4C06003E60D6 /* MFSpinnerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E01CC91174F4C06003E60D6 /* MFSpinnerView.h */; };
+		0E01CC9A174F4C06003E60D6 /* MFSpinnerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E01CC92174F4C06003E60D6 /* MFSpinnerView.m */; };
+		0E01CC9B174F4C06003E60D6 /* MFSpinnerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E01CC92174F4C06003E60D6 /* MFSpinnerView.m */; };
+		0E01CC9C174F4C06003E60D6 /* MFSpinnerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E01CC92174F4C06003E60D6 /* MFSpinnerView.m */; };
+		0E01CC9D174F4C06003E60D6 /* spinner.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E01CC93174F4C06003E60D6 /* spinner.png */; };
+		0E01CC9E174F4C06003E60D6 /* spinner.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E01CC93174F4C06003E60D6 /* spinner.png */; };
+		0E01CC9F174F4C06003E60D6 /* spinner@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E01CC94174F4C06003E60D6 /* spinner@2x.png */; };
+		0E01CCA0174F4C06003E60D6 /* spinner@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E01CC94174F4C06003E60D6 /* spinner@2x.png */; };
+		0E01CCA8174F4C6A003E60D6 /* MFTransitPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E01CCA2174F4C6A003E60D6 /* MFTransitPlugin.h */; };
+		0E01CCA9174F4C6A003E60D6 /* MFTransitPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E01CCA3174F4C6A003E60D6 /* MFTransitPlugin.m */; };
+		0E01CCAA174F4C6A003E60D6 /* MFTransitPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E01CCA3174F4C6A003E60D6 /* MFTransitPlugin.m */; };
+		0E01CCAB174F4C6A003E60D6 /* MFTransitPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E01CCA3174F4C6A003E60D6 /* MFTransitPlugin.m */; };
+		0E01CCAC174F4C6A003E60D6 /* MFTransitPopParameter.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E01CCA4174F4C6A003E60D6 /* MFTransitPopParameter.h */; };
+		0E01CCAD174F4C6A003E60D6 /* MFTransitPopParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E01CCA5174F4C6A003E60D6 /* MFTransitPopParameter.m */; };
+		0E01CCAE174F4C6A003E60D6 /* MFTransitPopParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E01CCA5174F4C6A003E60D6 /* MFTransitPopParameter.m */; };
+		0E01CCAF174F4C6A003E60D6 /* MFTransitPopParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E01CCA5174F4C6A003E60D6 /* MFTransitPopParameter.m */; };
+		0E01CCB0174F4C6A003E60D6 /* MFTransitPushParameter.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E01CCA6174F4C6A003E60D6 /* MFTransitPushParameter.h */; };
+		0E01CCB1174F4C6A003E60D6 /* MFTransitPushParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E01CCA7174F4C6A003E60D6 /* MFTransitPushParameter.m */; };
+		0E01CCB2174F4C6A003E60D6 /* MFTransitPushParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E01CCA7174F4C6A003E60D6 /* MFTransitPushParameter.m */; };
+		0E01CCB3174F4C6A003E60D6 /* MFTransitPushParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E01CCA7174F4C6A003E60D6 /* MFTransitPushParameter.m */; };
+		0E4C72F1174B17F900883F51 /* spinner.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E4C72E6174B17F900883F51 /* spinner.png */; };
+		0E4C72F3174B17F900883F51 /* spinner@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E4C72E7174B17F900883F51 /* spinner@2x.png */; };
 		0E885C9A169E8DFB001DB4B1 /* exist.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E885C99169E8DFB001DB4B1 /* exist.html */; };
 		0E885C9C169E9583001DB4B1 /* exist.css in Resources */ = {isa = PBXBuildFile; fileRef = 0E885C9B169E9583001DB4B1 /* exist.css */; };
 		3E0B18C8169D8CD7001A35BB /* MFDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = F54FBB3E14BBE04100F702D9 /* MFDevice.m */; };
@@ -28,7 +54,6 @@
 		3E0B18D9169D8CD7001A35BB /* NCToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E0F7DC1506116900DC7988 /* NCToolbar.m */; };
 		3E0B18DA169D8CD7001A35BB /* UILabel+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E0F7DE1506116900DC7988 /* UILabel+Resize.m */; };
 		3E0B18DB169D8CD7001A35BB /* MFTabBarController+Top.m in Sources */ = {isa = PBXBuildFile; fileRef = F5EF734C14EE8AA1003B7BA5 /* MFTabBarController+Top.m */; };
-		3E0B18DC169D8CD7001A35BB /* MFTransitPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4F50FE15A040DE0054EB23 /* MFTransitPlugin.m */; };
 		3E0B18DD169D8CD7001A35BB /* MFNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4F510315A0419E0054EB23 /* MFNavigationController.m */; };
 		3E0B18DE169D8CD7001A35BB /* MFTabBarController+Bottom.m in Sources */ = {isa = PBXBuildFile; fileRef = F5EF734314EE84A8003B7BA5 /* MFTabBarController+Bottom.m */; };
 		3E0B18DF169D8CD7001A35BB /* MFPGNativeComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0F08FE15A81D000025EFC2 /* MFPGNativeComponent.m */; };
@@ -236,7 +261,6 @@
 		3E4E8B0716AD14A500653A9F /* MFJSInterfaceProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4E8B0416AD14A500653A9F /* MFJSInterfaceProtocol.m */; };
 		3E4E8B0816AD14A500653A9F /* MFJSInterfaceProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4E8B0416AD14A500653A9F /* MFJSInterfaceProtocol.m */; };
 		3E4E8B0E16AD14F500653A9F /* MFJSInterfaceProtocolTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4E8B0A16AD14F500653A9F /* MFJSInterfaceProtocolTest.m */; };
-		3E4F510715A042E10054EB23 /* MFTransitPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4F50FE15A040DE0054EB23 /* MFTransitPlugin.m */; };
 		3E4F510815A042E50054EB23 /* MFNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4F510315A0419E0054EB23 /* MFNavigationController.m */; };
 		3E4F513F15A05BF10054EB23 /* MFDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F50460D813B3633B0050803F /* MFDelegate.m */; };
 		3E4F514015A05BF10054EB23 /* MFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F50460DA13B3633B0050803F /* MFViewController.m */; };
@@ -258,7 +282,6 @@
 		3E4F515015A05BF10054EB23 /* UILabel+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E0F7DE1506116900DC7988 /* UILabel+Resize.m */; };
 		3E4F515E15A05BF10054EB23 /* NCButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D44C9E2A1592ED86006372F3 /* NCButton.m */; };
 		3E4F515F15A05BF10054EB23 /* NCSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D44C9E2C1592ED86006372F3 /* NCSearchBar.m */; };
-		3E4F516115A05BF10054EB23 /* MFTransitPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4F50FE15A040DE0054EB23 /* MFTransitPlugin.m */; };
 		3E4F516215A05BF10054EB23 /* MFNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4F510315A0419E0054EB23 /* MFNavigationController.m */; };
 		3E4F516415A05BF10054EB23 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F57E523313D2E8DE00074B18 /* CoreMedia.framework */; };
 		3E4F516515A05BF10054EB23 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F504611413B364C60050803F /* Foundation.framework */; };
@@ -295,7 +318,6 @@
 		3E4F518715A05BF10054EB23 /* UILabel+Resize.h in Headers */ = {isa = PBXBuildFile; fileRef = F5E0F7DD1506116900DC7988 /* UILabel+Resize.h */; };
 		3E4F51B315A05BF10054EB23 /* NCButton.h in Headers */ = {isa = PBXBuildFile; fileRef = D44C9E291592ED86006372F3 /* NCButton.h */; };
 		3E4F51B415A05BF10054EB23 /* NCSearchBar.h in Headers */ = {isa = PBXBuildFile; fileRef = D44C9E2B1592ED86006372F3 /* NCSearchBar.h */; };
-		3E4F51B615A05BF10054EB23 /* MFTransitPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E4F50FD15A040DE0054EB23 /* MFTransitPlugin.h */; };
 		3E4F51B715A05BF10054EB23 /* MFNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E4F510215A0419E0054EB23 /* MFNavigationController.h */; };
 		3E52828B1662A09000902EA7 /* CDVSplashScreen+monacaSplashScreen.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E5282891662A09000902EA7 /* CDVSplashScreen+monacaSplashScreen.h */; };
 		3E52828C1662A09000902EA7 /* CDVSplashScreen+monacaSplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E52828A1662A09000902EA7 /* CDVSplashScreen+monacaSplashScreen.m */; };
@@ -371,9 +393,39 @@
 		3EE0E80B1664BA8200F1E677 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE0E8091664B78000F1E677 /* AssetsLibrary.framework */; };
 		3EE0E80C1664BA9200F1E677 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE0E8071664B69300F1E677 /* CoreVideo.framework */; };
 		3EF566AF168ECCD800DE569B /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EBC68C41664D23000244FE1 /* libiconv.dylib */; };
+		D49CA07A173CEEDC00738DC9 /* MFSpinnerParameter.h in Headers */ = {isa = PBXBuildFile; fileRef = D49CA075173CEEDC00738DC9 /* MFSpinnerParameter.h */; };
+		D49CA07B173CEEDC00738DC9 /* MFSpinnerParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = D49CA076173CEEDC00738DC9 /* MFSpinnerParameter.m */; };
+		D49CA07C173CEEDC00738DC9 /* MFSpinnerView.h in Headers */ = {isa = PBXBuildFile; fileRef = D49CA077173CEEDC00738DC9 /* MFSpinnerView.h */; };
+		D49CA07D173CEEDC00738DC9 /* MFSpinnerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D49CA078173CEEDC00738DC9 /* MFSpinnerView.m */; };
+		D49CA082173CEF6000738DC9 /* MFTransitPopParameter.h in Headers */ = {isa = PBXBuildFile; fileRef = D49CA07E173CEF6000738DC9 /* MFTransitPopParameter.h */; };
+		D49CA083173CEF6000738DC9 /* MFTransitPopParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = D49CA07F173CEF6000738DC9 /* MFTransitPopParameter.m */; };
+		D49CA084173CEF6000738DC9 /* MFTransitPushParameter.h in Headers */ = {isa = PBXBuildFile; fileRef = D49CA080173CEF6000738DC9 /* MFTransitPushParameter.h */; };
+		D49CA085173CEF6000738DC9 /* MFTransitPushParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = D49CA081173CEF6000738DC9 /* MFTransitPushParameter.m */; };
+		F1A28869174DBB9400233B47 /* MFVIewBackground.h in Headers */ = {isa = PBXBuildFile; fileRef = F1A28867174DBB9200233B47 /* MFVIewBackground.h */; };
+		F1A2886A174DBB9400233B47 /* MFVIewBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = F1A28868174DBB9300233B47 /* MFVIewBackground.m */; };
+		F1A2886B174DBB9400233B47 /* MFVIewBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = F1A28868174DBB9300233B47 /* MFVIewBackground.m */; };
+		F1A2886C174DBB9400233B47 /* MFVIewBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = F1A28868174DBB9300233B47 /* MFVIewBackground.m */; };
+		F1C170671752F9040020915D /* NCBarButtonItem.h in Headers */ = {isa = PBXBuildFile; fileRef = F1C170651752F9040020915D /* NCBarButtonItem.h */; };
+		F1C170681752F9040020915D /* NCBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C170661752F9040020915D /* NCBarButtonItem.m */; };
+		F1C170691752F9040020915D /* NCBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C170661752F9040020915D /* NCBarButtonItem.m */; };
+		F1C1706A1752F9040020915D /* NCBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C170661752F9040020915D /* NCBarButtonItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E01CC8F174F4C06003E60D6 /* MFSpinnerParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSpinnerParameter.h; sourceTree = "<group>"; };
+		0E01CC90174F4C06003E60D6 /* MFSpinnerParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSpinnerParameter.m; sourceTree = "<group>"; };
+		0E01CC91174F4C06003E60D6 /* MFSpinnerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSpinnerView.h; sourceTree = "<group>"; };
+		0E01CC92174F4C06003E60D6 /* MFSpinnerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSpinnerView.m; sourceTree = "<group>"; };
+		0E01CC93174F4C06003E60D6 /* spinner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spinner.png; sourceTree = "<group>"; };
+		0E01CC94174F4C06003E60D6 /* spinner@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "spinner@2x.png"; sourceTree = "<group>"; };
+		0E01CCA2174F4C6A003E60D6 /* MFTransitPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFTransitPlugin.h; sourceTree = "<group>"; };
+		0E01CCA3174F4C6A003E60D6 /* MFTransitPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFTransitPlugin.m; sourceTree = "<group>"; };
+		0E01CCA4174F4C6A003E60D6 /* MFTransitPopParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFTransitPopParameter.h; sourceTree = "<group>"; };
+		0E01CCA5174F4C6A003E60D6 /* MFTransitPopParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFTransitPopParameter.m; sourceTree = "<group>"; };
+		0E01CCA6174F4C6A003E60D6 /* MFTransitPushParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFTransitPushParameter.h; sourceTree = "<group>"; };
+		0E01CCA7174F4C6A003E60D6 /* MFTransitPushParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFTransitPushParameter.m; sourceTree = "<group>"; };
+		0E4C72E6174B17F900883F51 /* spinner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spinner.png; sourceTree = "<group>"; };
+		0E4C72E7174B17F900883F51 /* spinner@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "spinner@2x.png"; sourceTree = "<group>"; };
 		0E885C99169E8DFB001DB4B1 /* exist.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = exist.html; sourceTree = "<group>"; };
 		0E885C9B169E9583001DB4B1 /* exist.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = exist.css; sourceTree = "<group>"; };
 		3E0B192D169D8CD7001A35BB /* MFUnitTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MFUnitTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -469,8 +521,6 @@
 		3E4E8B0416AD14A500653A9F /* MFJSInterfaceProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFJSInterfaceProtocol.m; sourceTree = "<group>"; };
 		3E4E8B0916AD14F500653A9F /* MFJSInterfaceProtocolTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFJSInterfaceProtocolTest.h; sourceTree = "<group>"; };
 		3E4E8B0A16AD14F500653A9F /* MFJSInterfaceProtocolTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFJSInterfaceProtocolTest.m; sourceTree = "<group>"; };
-		3E4F50FD15A040DE0054EB23 /* MFTransitPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFTransitPlugin.h; sourceTree = "<group>"; };
-		3E4F50FE15A040DE0054EB23 /* MFTransitPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFTransitPlugin.m; sourceTree = "<group>"; };
 		3E4F510215A0419E0054EB23 /* MFNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFNavigationController.h; sourceTree = "<group>"; };
 		3E4F510315A0419E0054EB23 /* MFNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFNavigationController.m; sourceTree = "<group>"; };
 		3E4F51BC15A05BF10054EB23 /* libMonacaFramework.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMonacaFramework.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -515,6 +565,18 @@
 		D44C9E2A1592ED86006372F3 /* NCButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCButton.m; sourceTree = "<group>"; };
 		D44C9E2B1592ED86006372F3 /* NCSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCSearchBar.h; sourceTree = "<group>"; };
 		D44C9E2C1592ED86006372F3 /* NCSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCSearchBar.m; sourceTree = "<group>"; };
+		D49CA075173CEEDC00738DC9 /* MFSpinnerParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSpinnerParameter.h; sourceTree = "<group>"; };
+		D49CA076173CEEDC00738DC9 /* MFSpinnerParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSpinnerParameter.m; sourceTree = "<group>"; };
+		D49CA077173CEEDC00738DC9 /* MFSpinnerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSpinnerView.h; sourceTree = "<group>"; };
+		D49CA078173CEEDC00738DC9 /* MFSpinnerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSpinnerView.m; sourceTree = "<group>"; };
+		D49CA07E173CEF6000738DC9 /* MFTransitPopParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFTransitPopParameter.h; sourceTree = "<group>"; };
+		D49CA07F173CEF6000738DC9 /* MFTransitPopParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFTransitPopParameter.m; sourceTree = "<group>"; };
+		D49CA080173CEF6000738DC9 /* MFTransitPushParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFTransitPushParameter.h; sourceTree = "<group>"; };
+		D49CA081173CEF6000738DC9 /* MFTransitPushParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFTransitPushParameter.m; sourceTree = "<group>"; };
+		F1A28867174DBB9200233B47 /* MFVIewBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFVIewBackground.h; sourceTree = "<group>"; };
+		F1A28868174DBB9300233B47 /* MFVIewBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFVIewBackground.m; sourceTree = "<group>"; };
+		F1C170651752F9040020915D /* NCBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCBarButtonItem.h; sourceTree = "<group>"; };
+		F1C170661752F9040020915D /* NCBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCBarButtonItem.m; sourceTree = "<group>"; };
 		F50460AC13B361730050803F /* MonacaFramework-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MonacaFramework-Prefix.pch"; sourceTree = "<group>"; };
 		F50460D813B3633B0050803F /* MFDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFDelegate.m; sourceTree = "<group>"; };
 		F50460DA13B3633B0050803F /* MFViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFViewController.m; sourceTree = "<group>"; };
@@ -643,6 +705,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E01CC8E174F4C06003E60D6 /* Spinner */ = {
+			isa = PBXGroup;
+			children = (
+				0E01CC8F174F4C06003E60D6 /* MFSpinnerParameter.h */,
+				0E01CC90174F4C06003E60D6 /* MFSpinnerParameter.m */,
+				0E01CC91174F4C06003E60D6 /* MFSpinnerView.h */,
+				0E01CC92174F4C06003E60D6 /* MFSpinnerView.m */,
+				0E01CC93174F4C06003E60D6 /* spinner.png */,
+				0E01CC94174F4C06003E60D6 /* spinner@2x.png */,
+			);
+			path = Spinner;
+			sourceTree = "<group>";
+		};
+		0E01CCA1174F4C6A003E60D6 /* Transit */ = {
+			isa = PBXGroup;
+			children = (
+				0E01CCA2174F4C6A003E60D6 /* MFTransitPlugin.h */,
+				0E01CCA3174F4C6A003E60D6 /* MFTransitPlugin.m */,
+				0E01CCA4174F4C6A003E60D6 /* MFTransitPopParameter.h */,
+				0E01CCA5174F4C6A003E60D6 /* MFTransitPopParameter.m */,
+				0E01CCA6174F4C6A003E60D6 /* MFTransitPushParameter.h */,
+				0E01CCA7174F4C6A003E60D6 /* MFTransitPushParameter.m */,
+			);
+			path = Transit;
+			sourceTree = "<group>";
+		};
 		0E885C97169E8CD0001DB4B1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -781,15 +869,6 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
-		3E4F50FC15A040DE0054EB23 /* Transit */ = {
-			isa = PBXGroup;
-			children = (
-				3E4F50FD15A040DE0054EB23 /* MFTransitPlugin.h */,
-				3E4F50FE15A040DE0054EB23 /* MFTransitPlugin.m */,
-			);
-			path = Transit;
-			sourceTree = "<group>";
-		};
 		3E7FD2B8159D8F2400E85C81 /* MonacaSandbox */ = {
 			isa = PBXGroup;
 			children = (
@@ -872,9 +951,18 @@
 			path = ChildBrowser;
 			sourceTree = "<group>";
 		};
+		F13F51851741D906006D6D59 /* InnovationPlusPlugin */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = InnovationPlusPlugin;
+			sourceTree = "<group>";
+		};
 		F503A593146BE13800764D05 /* NativeComponents */ = {
 			isa = PBXGroup;
 			children = (
+				F1C170651752F9040020915D /* NCBarButtonItem.h */,
+				F1C170661752F9040020915D /* NCBarButtonItem.m */,
 				D44C9E291592ED86006372F3 /* NCButton.h */,
 				D44C9E2A1592ED86006372F3 /* NCButton.m */,
 				D44C9E2B1592ED86006372F3 /* NCSearchBar.h */,
@@ -993,9 +1081,9 @@
 		F54CEB541500D1A000516444 /* Monaca */ = {
 			isa = PBXGroup;
 			children = (
+				0E01CCA1174F4C6A003E60D6 /* Transit */,
 				3E8F180A16187F60005B09FC /* PhoneGap */,
 				3E0F08FC15A81D000025EFC2 /* PGPlugins */,
-				3E4F50FC15A040DE0054EB23 /* Transit */,
 			);
 			path = Monaca;
 			sourceTree = "<group>";
@@ -1011,13 +1099,16 @@
 		F5921FB3146B80690025DED5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F503A593146BE13800764D05 /* NativeComponents */,
-				F5921FB6146B80F00025DED5 /* MFTabBarController.m */,
-				F5921FB5146B80F00025DED5 /* MFTabBarController.h */,
+				0E01CC8E174F4C06003E60D6 /* Spinner */,
 				F5EF734214EE84A8003B7BA5 /* MFTabBarController+Bottom.h */,
 				F5EF734314EE84A8003B7BA5 /* MFTabBarController+Bottom.m */,
 				F5EF734B14EE8AA1003B7BA5 /* MFTabBarController+Top.h */,
 				F5EF734C14EE8AA1003B7BA5 /* MFTabBarController+Top.m */,
+				F5921FB5146B80F00025DED5 /* MFTabBarController.h */,
+				F5921FB6146B80F00025DED5 /* MFTabBarController.m */,
+				F1A28867174DBB9200233B47 /* MFVIewBackground.h */,
+				F1A28868174DBB9300233B47 /* MFVIewBackground.m */,
+				F503A593146BE13800764D05 /* NativeComponents */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1025,6 +1116,7 @@
 		F5F31BDD14820C7800C40C0B /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				F13F51851741D906006D6D59 /* InnovationPlusPlugin */,
 				3EB9B3F9161455B600E5F32C /* PhoneGap-plugins */,
 				F54CEB541500D1A000516444 /* Monaca */,
 				F54CEB581500D1A000516444 /* Vendor */,
@@ -1061,7 +1153,6 @@
 				3E4F518715A05BF10054EB23 /* UILabel+Resize.h in Headers */,
 				3E4F51B315A05BF10054EB23 /* NCButton.h in Headers */,
 				3E4F51B415A05BF10054EB23 /* NCSearchBar.h in Headers */,
-				3E4F51B615A05BF10054EB23 /* MFTransitPlugin.h in Headers */,
 				3E4F51B715A05BF10054EB23 /* MFNavigationController.h in Headers */,
 				3E0F090015A81D000025EFC2 /* MFPGNativeComponent.h in Headers */,
 				3EDD680916155CBA0018698B /* DatePicker.h in Headers */,
@@ -1115,6 +1206,17 @@
 				3E4E8AEB16AD122200653A9F /* MonacaNoCacheURLProtocol.h in Headers */,
 				3E4E8AEF16AD122200653A9F /* MonacaQueryParamURLProtocol.h in Headers */,
 				3E4E8B0516AD14A500653A9F /* MFJSInterfaceProtocol.h in Headers */,
+				D49CA07A173CEEDC00738DC9 /* MFSpinnerParameter.h in Headers */,
+				D49CA07C173CEEDC00738DC9 /* MFSpinnerView.h in Headers */,
+				D49CA082173CEF6000738DC9 /* MFTransitPopParameter.h in Headers */,
+				D49CA084173CEF6000738DC9 /* MFTransitPushParameter.h in Headers */,
+				F1A28869174DBB9400233B47 /* MFVIewBackground.h in Headers */,
+				0E01CC95174F4C06003E60D6 /* MFSpinnerParameter.h in Headers */,
+				0E01CC99174F4C06003E60D6 /* MFSpinnerView.h in Headers */,
+				0E01CCA8174F4C6A003E60D6 /* MFTransitPlugin.h in Headers */,
+				0E01CCAC174F4C6A003E60D6 /* MFTransitPopParameter.h in Headers */,
+				0E01CCB0174F4C6A003E60D6 /* MFTransitPushParameter.h in Headers */,
+				F1C170671752F9040020915D /* NCBarButtonItem.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1219,6 +1321,10 @@
 				3E0B1929169D8CD7001A35BB /* Default-568h@2x.png in Resources */,
 				0E885C9A169E8DFB001DB4B1 /* exist.html in Resources */,
 				0E885C9C169E9583001DB4B1 /* exist.css in Resources */,
+				0E4C72F1174B17F900883F51 /* spinner.png in Resources */,
+				0E4C72F3174B17F900883F51 /* spinner@2x.png in Resources */,
+				0E01CC9E174F4C06003E60D6 /* spinner.png in Resources */,
+				0E01CCA0174F4C06003E60D6 /* spinner@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1236,6 +1342,8 @@
 				3EDD681C16155D0F0018698B /* ChildBrowser.bundle in Resources */,
 				3EDD682516155D0F0018698B /* ChildBrowserViewController.xib in Resources */,
 				3E7708E0161169CF0041CF4D /* Default-568h@2x.png in Resources */,
+				0E01CC9D174F4C06003E60D6 /* spinner.png in Resources */,
+				0E01CC9F174F4C06003E60D6 /* spinner@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1294,7 +1402,6 @@
 				3E0B18D9169D8CD7001A35BB /* NCToolbar.m in Sources */,
 				3E0B18DA169D8CD7001A35BB /* UILabel+Resize.m in Sources */,
 				3E0B18DB169D8CD7001A35BB /* MFTabBarController+Top.m in Sources */,
-				3E0B18DC169D8CD7001A35BB /* MFTransitPlugin.m in Sources */,
 				3E0B18DD169D8CD7001A35BB /* MFNavigationController.m in Sources */,
 				3E0B18DE169D8CD7001A35BB /* MFTabBarController+Bottom.m in Sources */,
 				3E0B18DF169D8CD7001A35BB /* MFPGNativeComponent.m in Sources */,
@@ -1349,6 +1456,13 @@
 				3E4E8AF216AD122200653A9F /* MonacaQueryParamURLProtocol.m in Sources */,
 				3E4E8B0816AD14A500653A9F /* MFJSInterfaceProtocol.m in Sources */,
 				3E4E8B0E16AD14F500653A9F /* MFJSInterfaceProtocolTest.m in Sources */,
+				F1A2886C174DBB9400233B47 /* MFVIewBackground.m in Sources */,
+				0E01CC98174F4C06003E60D6 /* MFSpinnerParameter.m in Sources */,
+				0E01CC9C174F4C06003E60D6 /* MFSpinnerView.m in Sources */,
+				0E01CCAB174F4C6A003E60D6 /* MFTransitPlugin.m in Sources */,
+				0E01CCAF174F4C6A003E60D6 /* MFTransitPopParameter.m in Sources */,
+				0E01CCB3174F4C6A003E60D6 /* MFTransitPushParameter.m in Sources */,
+				F1C1706A1752F9040020915D /* NCBarButtonItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1376,7 +1490,6 @@
 				3E4F515015A05BF10054EB23 /* UILabel+Resize.m in Sources */,
 				3E4F515E15A05BF10054EB23 /* NCButton.m in Sources */,
 				3E4F515F15A05BF10054EB23 /* NCSearchBar.m in Sources */,
-				3E4F516115A05BF10054EB23 /* MFTransitPlugin.m in Sources */,
 				3E4F516215A05BF10054EB23 /* MFNavigationController.m in Sources */,
 				3E0F090215A81D000025EFC2 /* MFPGNativeComponent.m in Sources */,
 				3EDD680A16155CBA0018698B /* DatePicker.m in Sources */,
@@ -1427,6 +1540,17 @@
 				3E4E8AEC16AD122200653A9F /* MonacaNoCacheURLProtocol.m in Sources */,
 				3E4E8AF016AD122200653A9F /* MonacaQueryParamURLProtocol.m in Sources */,
 				3E4E8B0616AD14A500653A9F /* MFJSInterfaceProtocol.m in Sources */,
+				D49CA07B173CEEDC00738DC9 /* MFSpinnerParameter.m in Sources */,
+				D49CA07D173CEEDC00738DC9 /* MFSpinnerView.m in Sources */,
+				D49CA083173CEF6000738DC9 /* MFTransitPopParameter.m in Sources */,
+				D49CA085173CEF6000738DC9 /* MFTransitPushParameter.m in Sources */,
+				F1A2886A174DBB9400233B47 /* MFVIewBackground.m in Sources */,
+				0E01CC96174F4C06003E60D6 /* MFSpinnerParameter.m in Sources */,
+				0E01CC9A174F4C06003E60D6 /* MFSpinnerView.m in Sources */,
+				0E01CCA9174F4C6A003E60D6 /* MFTransitPlugin.m in Sources */,
+				0E01CCAD174F4C6A003E60D6 /* MFTransitPopParameter.m in Sources */,
+				0E01CCB1174F4C6A003E60D6 /* MFTransitPushParameter.m in Sources */,
+				F1C170681752F9040020915D /* NCBarButtonItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1453,7 +1577,6 @@
 				3E7FD337159ECC5C00E85C81 /* NCToolbar.m in Sources */,
 				3E7FD338159ECC6300E85C81 /* UILabel+Resize.m in Sources */,
 				3E7FD33A159ECC8300E85C81 /* MFTabBarController+Top.m in Sources */,
-				3E4F510715A042E10054EB23 /* MFTransitPlugin.m in Sources */,
 				3E4F510815A042E50054EB23 /* MFNavigationController.m in Sources */,
 				3E4405DC15A137CD00BA0FF6 /* MFTabBarController+Bottom.m in Sources */,
 				3E0F090315A81D000025EFC2 /* MFPGNativeComponent.m in Sources */,
@@ -1506,6 +1629,13 @@
 				3E4E8AED16AD122200653A9F /* MonacaNoCacheURLProtocol.m in Sources */,
 				3E4E8AF116AD122200653A9F /* MonacaQueryParamURLProtocol.m in Sources */,
 				3E4E8B0716AD14A500653A9F /* MFJSInterfaceProtocol.m in Sources */,
+				F1A2886B174DBB9400233B47 /* MFVIewBackground.m in Sources */,
+				0E01CC97174F4C06003E60D6 /* MFSpinnerParameter.m in Sources */,
+				0E01CC9B174F4C06003E60D6 /* MFSpinnerView.m in Sources */,
+				0E01CCAA174F4C6A003E60D6 /* MFTransitPlugin.m in Sources */,
+				0E01CCAE174F4C6A003E60D6 /* MFTransitPopParameter.m in Sources */,
+				0E01CCB2174F4C6A003E60D6 /* MFTransitPushParameter.m in Sources */,
+				F1C170691752F9040020915D /* NCBarButtonItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1550,6 +1680,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/MonacaFramework/Library/Vendor\"",
 					"\"$(SRCROOT)/MFUnitTest\"",
+					"\"$(SRCROOT)/MonacaFramework/Library/InnovationPlusPlugin\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1587,6 +1718,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/MonacaFramework/Library/Vendor\"",
 					"\"$(SRCROOT)/MFUnitTest\"",
+					"\"$(SRCROOT)/MonacaFramework/Library/InnovationPlusPlugin\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MFUnitTest/MFUnitTest-Prefix.pch";
@@ -1622,6 +1754,8 @@
 					"\"$(SRCROOT)/MonacaFramework/Plugins\"",
 					"\"$(SRCROOT)/../../../Shared/PhoneGap/Frameworks\"",
 					"\"$(SRCROOT)/MonacaFramework/Library/Vendor\"",
+					"\"$(SRCROOT)/../../../../../../Downloads/IPP_SampleApp\"",
+					"\"$(SRCROOT)/MonacaFramework/Library/InnovationPlusPlugin\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MonacaFramework/MonacaFramework-Prefix.pch";
@@ -1655,6 +1789,8 @@
 					"\"$(SRCROOT)/MonacaFramework/Plugins\"",
 					"\"$(SRCROOT)/../../../Shared/PhoneGap/Frameworks\"",
 					"\"$(SRCROOT)/MonacaFramework/Library/Vendor\"",
+					"\"$(SRCROOT)/../../../../../../Downloads/IPP_SampleApp\"",
+					"\"$(SRCROOT)/MonacaFramework/Library/InnovationPlusPlugin\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MonacaFramework/MonacaFramework-Prefix.pch";
@@ -1683,6 +1819,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/MonacaFramework/Library/Vendor\"",
+					"\"$(SRCROOT)/MonacaFramework/Library/InnovationPlusPlugin\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1696,6 +1833,7 @@
 				INFOPLIST_FILE = "MonacaSandbox/MonacaSandbox-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1719,6 +1857,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/MonacaFramework/Library/Vendor\"",
+					"\"$(SRCROOT)/MonacaFramework/Library/InnovationPlusPlugin\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MonacaSandbox/MonacaSandbox-Prefix.pch";
@@ -1727,6 +1866,7 @@
 				INFOPLIST_FILE = "MonacaSandbox/MonacaSandbox-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";

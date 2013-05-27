@@ -287,10 +287,18 @@ static NSString *base_url = @"https://api.monaca.mobi";
     [properties setValue:path forKey:NSHTTPCookiePath];
     [properties setValue:name forKey:NSHTTPCookieName];
     [properties setValue:device_id forKey:NSHTTPCookieValue];
-    [properties setValue:@"TURE" forKey:NSHTTPCookieSecure];
+    [properties setValue:@"TRUE" forKey:NSHTTPCookieSecure];
     [properties setValue:nil forKey:NSHTTPCookieExpires];
     NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:properties];
     NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    
+    NSNumber* disableCookie = [[appJSON objectForKey:@"security"] objectForKey:@"disableCookie"];
+    if ([disableCookie boolValue]) {
+        storage.cookieAcceptPolicy = NSHTTPCookieAcceptPolicyOnlyFromMainDocumentDomain;
+        
+    }else{
+        storage.cookieAcceptPolicy = NSHTTPCookieAcceptPolicyAlways;
+    }
     [storage setCookie:cookie];
 }
 

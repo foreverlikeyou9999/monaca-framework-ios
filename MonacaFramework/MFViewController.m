@@ -12,8 +12,10 @@
 #import "MFTransitPlugin.h"
 #import "MFUtility.h"
 #import "MFEvent.h"
+#import "MFVIewBackground.h"
 
 @interface MFViewController ()
+@property(nonatomic,retain)NSString* query;
 - (NSString *)careWWWdir:(NSString *)path;
 - (void)processDataTypes;
 @end
@@ -31,7 +33,12 @@
 
 // Parses *.ui files.
 
-- (NSDictionary *)parseJSONFile:(NSString *)path {
+- (NSDictionary *)loadUIFile:(NSString *)path {
+
+    if (![NSFileManager.defaultManager fileExistsAtPath:path]) {
+        return nil;
+    }
+    
     NSError *error = nil;
     NSString *data = [NSString stringWithContentsOfFile:path
                                                encoding:NSUTF8StringEncoding
@@ -42,12 +49,25 @@
         [MFEvent dispatchEvent:monacaEventNoUIFile withInfo:info];
         return nil;
     }
+    
     if (YES){
-        data = [data stringByReplacingOccurrencesOfString:@"((?:\".*?\"[^\"]*?)*)[\"]*(\\w+)[\"]*\\s*:"
-                                               withString:@"$1\"$2\":"
-                                                  options:NSRegularExpressionSearch
-                                                    range:NSMakeRange(0, [data length])];
+        NSRegularExpression *reg = [[NSRegularExpression alloc] initWithPattern:@"(^[^\"]*?(\"[^\"]*?\"[^\"]*?)*?[^\"\\w]+)\\s*(\\w+)\\s*:"
+                                                                        options:0
+                                                                          error:nil];
+        NSArray *results;
+        do {
+            results  = [reg matchesInString:data options:0 range:NSMakeRange(0, data.length)];
+            for (NSTextCheckingResult *result in results) {
+                NSRange range = [result rangeAtIndex:3];
+                NSString *str = [data substringWithRange:range];
+                data = [data stringByReplacingOccurrencesOfString:[data substringWithRange:range]
+                                                       withString:[NSString stringWithFormat:@"\"%@\"", str]
+                                                          options:0
+                                                            range:range];
+            }
+        } while ([results count] != 0);
     }
+
     id jsonString = [data cdvjk_objectFromJSONStringWithParseOptions:CDVJKParseOptionStrict error:&error];
     
     // send log error
@@ -64,7 +84,7 @@
 
     // return ui dictionary
     if (jsonString == nil) {
-        return [NSMutableDictionary dictionary];
+        return nil;
     } else {
         CFDictionaryRef cfUiDict = CFPropertyListCreateDeepCopy(kCFAllocatorDefault,
                                                                 (__bridge CFPropertyListRef)(jsonString),
@@ -112,7 +132,7 @@
     return [NSURL URLWithString:str];
 }
 
-- (id)init{
+- (id)init {
     self = [super init];
     if (self){
         uiSetting = nil;
@@ -120,15 +140,16 @@
     return self;
 }
 
-- (id)initWithFileName:(NSString *)fileName{
+- (id)initWithFileName:(NSString *)fileName {
     self = [self init];
     if (nil != self) {
         cdvViewController = [[CDVViewController alloc] init];
         cdvViewController.wwwFolderName = @"www";
-        cdvViewController.startPage = fileName;
+        cdvViewController.startPage = [self removeFragment:fileName];
         
         self.recall = NO;
         self.previousPath = nil;
+        
         isFirstRendering = YES;
         interfaceOrientationUnspecified = YES;
         interfaceOrientation = UIInterfaceOrientationPortrait;
@@ -145,6 +166,10 @@
     }
     
     return self;
+}
+
+- (NSString *)removeFragment:(NSString*)fileName {
+    return [[fileName componentsSeparatedByString:@"#"] objectAtIndex:0];
 }
 
 - (void)dealloc {
@@ -213,9 +238,6 @@
     [tabBarController applyUserInterface:uiSetting];
     
     [self initPlugins]; // 画面を消す手前でdestroyを実行すること
-
-    // transit
-    [MFTransitPlugin viewDidLoad:self];
 }
 
 - (void)viewDidUnload {
@@ -251,7 +273,8 @@
 - (void)processDataTypes
 {
     // dataDetectorTypes from plist
-    id types = [[[MFUtility getAppDelegate] getApplicationPlist] objectForKey:@"DetectDataTypes"];
+    id types = [MFUtility.getAppDelegate.getApplicationPlist objectForKey:@"DetectDataTypes"];
+    
     if ([types respondsToSelector:@selector(boolValue)]) {
         BOOL res = [types boolValue];
         cdvViewController.webView.dataDetectorTypes = res ? UIDataDetectorTypeAll : UIDataDetectorTypeNone;
@@ -266,16 +289,31 @@
     BOOL hasAnchor = [[self class] hasAnchor:[request URL]];
     // ネイティブコンポーネントをMonacaへ持ち込むにあたって、path取得を切り替えたため、standarizedURLを見直しています katsuya
     //NSURL *url = [[self class] standardizedURL:[request URL]];
-    NSURL *url = [[request URL] standardizedURL];
+    NSURL *url = request.URL.standardizedURL;
     
+    //NSString* absoluteUrl = request.URL.absoluteString;
+    
+    NSString* query = nil;
+    query = request.URL.query;
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSMutableDictionary *queryParams = [NSMutableDictionary dictionary];
+    if(query){
+        [queryParams setObject:query forKey:@"queryParams"];
+      // absoluteUrl =  [absoluteUrl stringByReplacingOccurrencesOfString: [@"?" stringByAppendingString: query] withString: @""];
+    }
+    [userDefaults registerDefaults:queryParams];
+    //aタグでの画面遷移時はurlにqueryParamsが含まれる　将来的にpushPageの仕様と合わせる
+    //NSURL* url = [[NSURL alloc]initWithString:absoluteUrl];
+
     // avoid to open gap schema and about scheme ---
     if ([url.scheme isEqual:@"gap"] || [url.scheme isEqual:@"http"] || [url.scheme isEqual:@"https"] || [url.scheme isEqual:@"about"]){
         return [cdvViewController webView:webView_ shouldStartLoadWithRequest:request navigationType:navigationType];
     }
     
-    MFDelegate *delegate = (MFDelegate *)[UIApplication sharedApplication].delegate;
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *startPagePath = [[delegate getBaseURL].path stringByAppendingFormat:@"/%@", self.cdvViewController.startPage];
+    MFDelegate *delegate = (MFDelegate *)UIApplication.sharedApplication.delegate;
+    NSFileManager *fileManager = NSFileManager.defaultManager;
+    NSString *startPagePath = [delegate.getBaseURL.path stringByAppendingFormat:@"/%@", self.cdvViewController.startPage];
     
     NSString *errorPath = nil;
     if (![fileManager fileExistsAtPath:startPagePath] && !self.recall) {
@@ -302,46 +340,52 @@
 
     if ([url isFileURL]) {
         NSMutableDictionary *info = [NSMutableDictionary dictionary];
-        [info setObject:[url path] forKey:@"path"];
+        [info setObject:url.path forKey:@"path"];
         [MFEvent dispatchEvent:monacaEventOpenPage withInfo:info];
 
         // Treat anchor parameters.
         if (hasAnchor) {
-            if (self.previousPath && [[url path] isEqualToString:self.previousPath]) {
-                self.recall=YES;
+            if (self.previousPath && [url.path isEqualToString:self.previousPath]) {
+                self.recall = YES;
                 return YES;
             }
         }
         [MFEvent dispatchEvent:monacaEventWillLoadUIFile withInfo:info];
-        self.previousPath = [url path];
+        self.previousPath = url.path;
 
         BOOL isDir;
         NSFileManager *fileManager = [NSFileManager defaultManager];
-        [fileManager fileExistsAtPath:[url path] isDirectory:&isDir];
+        [fileManager fileExistsAtPath:url.path isDirectory:&isDir];
 
-        NSString *filepath = [url path];
+        NSString *filepath = url.path;
         NSString *uipath;
 
         if (isDir == YES) {
             uipath = [filepath stringByAppendingPathComponent:@"index.ui"];
             filepath = [filepath stringByAppendingPathComponent:@"index.html"];
         } else {
-            uipath = [[filepath stringByDeletingPathExtension] stringByAppendingPathExtension:@"ui"];
+            uipath = [filepath.stringByDeletingPathExtension stringByAppendingPathExtension:@"ui"];
         }
 
         @try {
             if (cdvViewController.webView.tag != kWebViewIgnoreStyle && withinSinglePage == NO) {
                 cdvViewController.webView.tag = kWebViewNormal;
                 // Apply user interface definitions.
-                NSDictionary *uiDict = [self parseJSONFile:uipath];
+                NSDictionary *uiDict = [self loadUIFile:uipath];
 
-                if (![fileManager fileExistsAtPath:uipath]) {
-                    uiDict = nil;
-                }
-                [[MFUtility currentTabBarController] applyUserInterface:uiDict];
+                [MFUtility.currentTabBarController applyUserInterface:uiDict];
                 
                 // when use splash screen, dosen't show native component. @see monacaSplashScreen.
                 uiSetting = [NSMutableDictionary dictionaryWithDictionary:uiDict];
+                
+                // setting for page style.
+                id dict = [uiDict objectForKey:@"style"];
+                if ([dict isKindOfClass:NSDictionary.class]) {
+                    styleDict_ = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary *)dict];
+                } else {
+                    styleDict_ = nil;
+                }
+                [self applyStyleDict:styleDict_];
 
             } else {
                 cdvViewController.webView.tag = kWebViewNormal;
@@ -349,9 +393,10 @@
         }
         @catch (NSException *exception) {
             cdvViewController.webView.tag = kWebViewNormal;
-            [[MFUtility currentTabBarController] applyUserInterface:nil];
+            [MFUtility.currentTabBarController applyUserInterface:nil];
         }
     }
+    
     return [cdvViewController webView:webView_ shouldStartLoadWithRequest:request navigationType:navigationType];
 }
 
@@ -369,6 +414,47 @@
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"extraJSON"];
 }
 
+- (void)applyStyleDict:(NSMutableDictionary*)pageStyle
+{
+    // monaca.updateUIStyle対策
+    styleDict_ = pageStyle;
+    
+    self.cdvViewController.webView.backgroundColor = [UIColor clearColor];
+    self.cdvViewController.webView.opaque = NO;
+    
+    UIInterfaceOrientation orientation = [MFUtility currentInterfaceOrientation];
+    float navBarHeight = [MFDevice heightOfNavigationBar:orientation];
+    if ( self.appNavigationController.navigationBar.hidden == YES) {
+        navBarHeight = 0;
+    }
+
+    float tabBarHeight = 0;
+    
+    //tabBarは表示が定義されていない場合も画面外に保持されている
+    if ( self.tabBarController.tabBar.frame.origin.y < self.view.frame.size.height) {
+        tabBarHeight = [MFDevice heightOfTabBar];
+    }
+    
+    // remove old background
+    if( [[self.view viewWithTag:kWebViewBackground] isKindOfClass:UIImageView.class] )
+    {
+        [[self.view viewWithTag:kWebViewBackground] removeFromSuperview];
+    }
+    
+    MFVIewBackground* backgroundImageView = [[MFVIewBackground alloc] initWithFrame:CGRectMake( self.view.frame.origin.x,
+                                                                                               self.view.frame.origin.y + navBarHeight,
+                                                                                               self.view.frame.size.width,
+                                                                                               self.view.frame.size.height  - navBarHeight - tabBarHeight)];
+
+    backgroundImageView.tag = kWebViewBackground;
+    [backgroundImageView setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth ];
+    [backgroundImageView setBackgroundStyle:styleDict_];
+    [self.view insertSubview:backgroundImageView atIndex:0];
+    [backgroundImageView sendSubviewToBack:self.view];
+    [tabBarController.ncManager setComponent:backgroundImageView forID:kNCContainerPage];
+    
+}
+
 - (void) webViewDidFinishLoad:(UIWebView*) theWebView 
 {
     // Black base color for background matches the native apps
@@ -379,7 +465,6 @@
     }
 
     [MFEvent dispatchEvent:monacaEventDidLoadUIFile withInfo:nil];
-    [MFTransitPlugin webViewDidFinishLoad:theWebView viewController:self];
     
     withinSinglePage = NO;
 
@@ -447,6 +532,8 @@
         [activityView removeFromSuperview];
         [imageView addSubview:activityView];
     }
+
+    [self applyStyleDict:styleDict_];
 }
 
 #pragma mark - Cordova Plugin
@@ -494,6 +581,40 @@
     [self.cdvViewController.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"about:blank"]]];
     [self resetPlugins];
     [self releaseWebView];
+}
+
+#pragma mark - Other methods
+
+// Setup page's background color
+-(void)setupBackgroundColor:(UIColor *)color
+{
+    self.cdvViewController.webView.backgroundColor = [UIColor clearColor];
+    self.cdvViewController.webView.opaque = NO;
+    
+    UIScrollView *scrollView = nil;
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 5.0f) {
+        for (UIView *subview in [self.cdvViewController.webView subviews]) {
+            if ([[subview.class description] isEqualToString:@"UIScrollView"]) {
+                scrollView = (UIScrollView *)subview;
+            }
+        }
+    } else {
+        scrollView = (UIScrollView *)[self.cdvViewController.webView scrollView];
+    }
+    
+    if (scrollView) {
+        scrollView.opaque = NO;
+        scrollView.backgroundColor = [UIColor clearColor];
+        // Remove shadow
+        for (UIView *subview in [scrollView subviews]) {
+            if([subview isKindOfClass:[UIImageView class]]){
+                subview.hidden = YES;
+            }
+        }
+    }
+    
+    self.view.opaque = YES;
+    self.view.backgroundColor = color;
 }
 
 @end

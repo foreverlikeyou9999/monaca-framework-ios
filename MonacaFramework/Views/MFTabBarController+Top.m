@@ -9,6 +9,7 @@
 #import "MFTabBarController+Top.h"
 #import "MFDevice.h"
 
+#import <QuartzCore/QuartzCore.h>
 
 // Supports iOS4. Cannot use setTintColor method in iOS4.
 static void
@@ -45,92 +46,38 @@ setBackgroundColor(NSArray *components, NCToolbar *toolbar) {
     return style;
 }
 
+- (void)showLeftComponent {
+    NSMutableArray *items = [NSMutableArray array];
+    for (NCContainer *container in self.leftContainers) {
+        if (![(NCButton *)(container.component) hidden])
+            [items addObject:container.component];
+    }
+    self.navigationItem.leftBarButtonItems = nil;
+    self.navigationItem.leftBarButtonItems = items;
+}
+
+- (void)showRightComponent {
+    NSMutableArray *items = [NSMutableArray array];
+    for (NCContainer *container in self.rightContainers) {
+        if (![(NCButton *)(container.component) hidden])
+            [items addObject:container.component];
+    }
+    self.navigationItem.rightBarButtonItems = nil;
+    self.navigationItem.rightBarButtonItems = items;
+}
+
 // Set left side component on the toolbar.
 - (void)setLeftComponent:(NSArray *)components {
-    NSMutableArray *items = [NSMutableArray array];
+    self.leftContainers = [self createContainers:components position:kNCTypeLeft];
     
-    self.leftContainers = [self createContainers:components position:kNCPositionTop];
-    
-    for (NCContainer *container in self.leftContainers) {
-        [items addObject:container.component];
-    }
-    
-    if ([items count] == 1){
-        self.navigationItem.leftBarButtonItem = [items objectAtIndex:0];
-        return;
-    }
-
-    UIInterfaceOrientation orientation = [MFUtility currentInterfaceOrientation];
-    double width = [MFDevice widthOfWindow:orientation];
-    double height = [MFDevice heightOfNavigationBar:orientation];
-    NCToolbar *toolbar = [[NCToolbar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, width, height)];
-    [toolbar setBackgroundColor:[UIColor clearColor]];
-    toolbar.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-    UIBarButtonItem *toolbarBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:toolbar];
-    toolbar.items = items;
-    [toolbar sizeToFit];
-    
-    setBackgroundColor(components, toolbar);
-    
-    // Adjust button position
-    CGRect bounds = [toolbar bounds];
-    bounds.origin.y = 1.0f;
-    toolbar.bounds = bounds;
-    
-    // Adjust UIToolBar left margin.
-    static const double kMargin = -5.0f;
-    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    negativeSpacer.width = kMargin;
-    
-    // iOS4 cannot use leftBarButtonItems.
-    if ([MFDevice iOSVersionMajor] < 5)
-        self.navigationItem.leftBarButtonItem = toolbarBarButtonItem;
-    else
-        self.navigationItem.leftBarButtonItems = items;
-    //self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, toolbarBarButtonItem, nil];
+    [self showLeftComponent];
 }
 
 // Set right side component on the toolbar.
 - (void)setRightComponent:(NSArray *)components {
-    NSMutableArray *items = [NSMutableArray array];
-    
-    self.rightContainers = [self createContainers:components position:kNCPositionTop];
-    if (self.rightContainers.count == 1) {
-        NCContainer *container = [self.rightContainers objectAtIndex:0];
-        self.navigationItem.rightBarButtonItem = container.component;
-        return;
-    }
-    
-    for (NCContainer *container in self.rightContainers) {
-        [items addObject:container.component];
-    }
-    
-    UIInterfaceOrientation orientation = [MFUtility currentInterfaceOrientation];
-    double width = [MFDevice widthOfWindow:orientation];
-    double height = [MFDevice heightOfNavigationBar:orientation];
-    NCToolbar *toolbar = [[NCToolbar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, width, height)];
-    [toolbar setBackgroundColor:[UIColor clearColor]];
-    toolbar.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-    UIBarButtonItem *toolbarBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:toolbar];
-    
-    toolbar.items = items;
-    [toolbar sizeToFit];
-    
-    setBackgroundColor(components, toolbar);
-    
-    // Adjust button position
-    CGRect bounds = [toolbar bounds];
-    bounds.origin.y = 1.0f;
-    toolbar.bounds = bounds;
-    
-    // Adjust UIToolBar right margin.
-    static const double kMargin = -5.0f;
-    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    negativeSpacer.width = kMargin;
-    
-    // iOS4 cannot use rightsBarButtonItems.
-    self.navigationItem.rightBarButtonItem = toolbarBarButtonItem;
-    //self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, toolbarBarButtonItem, nil];
+    self.rightContainers = [self createContainers:components position:kNCTypeRight];
+
+    [self showRightComponent];
 }
 
 // Set center component on the toolbar.
@@ -168,8 +115,20 @@ setBackgroundColor(NSArray *components, NCToolbar *toolbar) {
     NSMutableDictionary *topBarStyle = [self dictionaryWithTopBarStyle];
     NSString *title = [topBarStyle objectForKey:kNCStyleTitle];
     NSString *subtitle = [topBarStyle objectForKey:kNCStyleSubtitle];
+    NSString *titleImageFilePath = [topBarStyle objectForKey:kNCStyleTitleImage];
     
-    if ((title && [title length] > 0) || (subtitle && [subtitle length] > 0)) {
+    
+    if(titleImageFilePath && [titleImageFilePath length] > 0)
+    {
+        // title image set
+        NCTitleView *titleView = [[NCTitleView alloc] init];
+        [titleView setTitleImage:titleImageFilePath];
+        self.navigationItem.titleView = titleView;
+        self.navigationItem.title = nil;
+
+    }
+    else if ((title && [title length] > 0) || (subtitle && [subtitle length] > 0))
+    {
         NSString *titleColor = [topBarStyle objectForKey:kNCStyleTitleColor];
         NSString *subtitleColor = [topBarStyle objectForKey:kNCStyleSubtitleColor];
         
@@ -201,6 +160,7 @@ setBackgroundColor(NSArray *components, NCToolbar *toolbar) {
         self.navigationItem.titleView = titleView;
         self.navigationItem.title = nil;
     }
+    
 }
 
 - (MFTabBarController *)applyTopToolbar:(NSDictionary *)style {
@@ -297,7 +257,33 @@ setBackgroundColor(NSArray *components, NCToolbar *toolbar) {
         if (toolbarColor) {
             UIColor *bgColor = hexToUIColor(removeSharpPrefix(toolbarColor), 1);
             [navBar setTintColor:bgColor];
+            
         }
+        
+        // modify:2013.05.17 navbar_shadowOpacity add by shikata
+        CALayer *navBarLayer = navBar.layer;
+        //navBarLayer.shadowColor = [[UIColor blackColor] CGColor];
+        //navBarLayer.shadowRadius = 3.0f;
+        navBarLayer.shadowOffset = CGSizeMake(0.0f, 1.0f);
+        navBarLayer.shadowOpacity = 0.3f; //デフォルト値
+    
+        NSString *shadowOpacityString = [style objectForKey:kNCStyleShadowOpacity];
+        if(shadowOpacityString && [shadowOpacityString floatValue])
+        {
+            if([shadowOpacityString floatValue] > 1.0f)
+            {
+                navBarLayer.shadowOpacity = 1.0f;
+            }
+            else if ([shadowOpacityString floatValue] < 0.0f)
+            {
+                navBarLayer.shadowOpacity = 0.0f;
+            }
+            else
+            {
+                navBarLayer.shadowOpacity = [shadowOpacityString floatValue];
+            }
+        }
+        // modify_end
     }
     
     // Set title and subtitle.

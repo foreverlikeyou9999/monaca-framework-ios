@@ -25,9 +25,11 @@ setTextColor(UIBarButtonItem *button, UIColor *color) {
 
 static UIBarButtonItem *
 updateVisibility(UIBarButtonItem *button, NSDictionary *style) {
-    NSString *cid = [style objectForKey:kNCTypeID];
-    UIView *view = [[MFUtility currentTabBarController].viewDict objectForKey:cid];
-    [view setHidden:isFalse([style objectForKey:kNCStyleVisibility])];
+    if ([style objectForKey:kNCStyleVisibility] != nil) {
+        [(NCButton *)button setHidden:isFalse([style objectForKey:kNCStyleVisibility])];
+    } else {
+        [(NCButton *)button setHidden:NO];
+    }
     return button;
 }
 
@@ -41,7 +43,7 @@ updateButton(UIBarButtonItem *button, NSDictionary *style) {
     NSString *text = [style objectForKey:kNCStyleText];
     NSString *innerImagePath = [style objectForKey:kNCStyleInnerImage];
 
-    if (innerImagePath) {
+    if (innerImagePath && ![innerImagePath isEqual:[NSNull null]]) {
         MFDelegate *mfDelegate = (MFDelegate *)[UIApplication sharedApplication].delegate;
         NSString *currentDirectory = [mfDelegate.viewController.previousPath stringByDeletingLastPathComponent];
         NSString *imagePath = [currentDirectory stringByAppendingPathComponent:innerImagePath];
@@ -78,7 +80,7 @@ updateButton(UIBarButtonItem *button, NSDictionary *style) {
     // Shape.
     
     NSString *imageName = [style objectForKey:kNCStyleImage];
-    if (imageName) {
+    if (imageName && ![imageName isEqual:[NSNull null]]) {
         MFDelegate *mfDelegate = (MFDelegate *)[UIApplication sharedApplication].delegate;
         NSString *currentDirectory = [mfDelegate.viewController.previousPath stringByDeletingLastPathComponent];
         NSString *imagePath = [currentDirectory stringByAppendingPathComponent:imageName];
